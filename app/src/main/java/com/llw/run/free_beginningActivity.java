@@ -1,6 +1,8 @@
-
 package com.llw.run;
+import java.util.Date;
 
+import android.os.SystemClock;
+import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,9 @@ import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.GeocodeResult;
@@ -61,6 +66,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
 
     private LatLng currentLatLng;
     private long totalDistance=0;
+    Chronometer timer;
 
 
     @Override
@@ -70,12 +76,22 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_free_beginning);
+        timer=(Chronometer)findViewById(R.id.timer);
 //        mapView=findViewById(R.id.map_view);
 //        mapView.onCreate(savedInstanceState);
         initLocation();
         initMap(savedInstanceState);
 
         mLocationClient.startLocation();
+        Button stoprun=findViewById(R.id.stoprun);
+        stoprun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.stop();
+//                mLocationClient.stopLocation();
+//                mLocationClient.onDestroy();
+            }
+        });
     }
 
 
@@ -104,18 +120,18 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         //设置是否返回地址信息（默认返回地址信息）
         mLocationOption.setNeedAddress(true);
         //设置定位请求超时时间，单位是毫秒，默认30000毫秒，建议超时时间不要低于8000毫秒。
-        mLocationOption.setHttpTimeOut(20000);
+        mLocationOption.setHttpTimeOut(30000);
+        mLocationOption.setInterval(3000);
         //关闭缓存机制，高精度定位会产生缓存。
         mLocationOption.setLocationCacheEnable(false);
         //给定位客户端对象设置定位参数
         mLocationClient.setLocationOption(mLocationOption);
-        new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mLocationClient.startLocation();//启动定位
-                }
-            }).start();
-        mLocationClient.startLocation();//启动定位
+//        new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    mLocationClient.startLocation();//启动定位
+//                }
+//            }).start();
 
     }
     /**
@@ -129,36 +145,53 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
             if (aMapLocation.getErrorCode() == 0) {
                 //地址
                 String address = aMapLocation.getAddress();
-//获取维度
+//                showMsg(address);
+                //获取维度
                 double latitude=aMapLocation.getLatitude();
                 //获取经度
                 double longitude=aMapLocation.getLongitude();
                 //首次定位时
                 if (currentLatLng == null) {
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    int hour=(int)((SystemClock.elapsedRealtime()-timer.getBase())/1000/60);
+                    timer.setFormat("0"+String.valueOf(hour)+" :%s");
+                    timer.start();
                     currentLatLng = new LatLng(latitude, longitude);
                 }
                 LatLng lastLatLng = currentLatLng;
                 currentLatLng = new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 float movedDisdance=AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
                 //绘制移动路线
-                aMap.addPolyline(new PolylineOptions().add(lastLatLng,currentLatLng).width(10).color(Color.argb(255,1,1,1)));
-                totalDistance +=movedDisdance;
+                aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+                    @Override
+                    public void onCameraChange(final CameraPosition cameraPosition) {
+                        //官方文档有更详细的说明
+                        aMap.addPolyline(new PolylineOptions().add(lastLatLng,currentLatLng).width(10).color(Color.argb(255,1,1,1)));
+                        totalDistance +=movedDisdance;
+                        showMsg("好的");
+                    }
+                    @Override
+                    public void onCameraChangeFinish(final CameraPosition cameraPosition) {
+
+                    }
+                });
+//                aMap.addPolyline(new PolylineOptions().add(lastLatLng,currentLatLng).width(10).color(Color.argb(255,1,1,1)));
+//                totalDistance +=movedDisdance;
 
                 //界面显示总里程和速度
                 TextView s=findViewById(R.id.distance);
                 TextView sp=findViewById(R.id.speed);
-                TextView time=findViewById(R.id.time);
                 s.setText(totalDistance+"");
                 sp.setText(aMapLocation.getSpeed()+"");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
                 //获取当前时间
                 Date date = new Date(System.currentTimeMillis());
-                time.setText(simpleDateFormat.format(date));
 
 //                mLocationClient.stopLocation();
                 if(mListener !=null){
                     mListener.onLocationChanged(aMapLocation);
                 }
+
 
             } else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
@@ -174,7 +207,9 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         super.onDestroy();
         //销毁定位客户端，同时销毁本地定位服务。
         mLocationClient.onDestroy();
-        mapView.onDestroy();
+        if(null != mLocationClient){
+            mLocationClient.onDestroy();
+        }
     }
 
     @Override
@@ -208,12 +243,15 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         //设置最小缩放等级为16 ，缩放级别范围为[3, 20]
 //        aMap.setMinZoomLevel(19);
         aMap.moveCamera(CameraUpdateFactory.zoomTo(20));
-
-
+        aMap.getUiSettings().setMyLocationButtonEnabled(false);
+        ////隐藏缩放按钮
+        aMap.getUiSettings().setZoomControlsEnabled(false);
+        aMap.setMyLocationType(MyLocationStyle.LOCATION_TYPE_MAP_ROTATE);
         // 设置定位监听
         aMap.setLocationSource(this);
         // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         aMap.setMyLocationEnabled(true);
+        aMap.getUiSettings().setAllGesturesEnabled(false);//禁止地图可拖动
 
 
     }
@@ -224,7 +262,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         mListener = onLocationChangedListener;
         if (mLocationClient == null) {
-            mLocationClient.startLocation();//启动定位
+//            mLocationClient.startLocation();//启动定位
         }
     }
 
@@ -235,8 +273,8 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
     public void deactivate() {
         mListener = null;
         if (mLocationClient != null) {
-            mLocationClient.stopLocation();
-            mLocationClient.onDestroy();
+//            mLocationClient.stopLocation();
+//            mLocationClient.onDestroy();
         }
         mLocationClient = null;
     }

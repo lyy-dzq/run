@@ -30,12 +30,13 @@
                 android:layout_weight="1"
                 android:gravity="center" />
 
-            <TextView
-                android:id="@+id/time"
+            <Chronometer
+                android:id="@+id/timer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:format="00:00:00"
+                android:gravity="center"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/home_button2"
-        android:text="暂停"
+        android:text="结束"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="600dp"
