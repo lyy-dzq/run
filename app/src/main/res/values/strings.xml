@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">漫跑</string>
+    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">广场</string>
+    <string name="title_notifications">我的</string>
+</resources>

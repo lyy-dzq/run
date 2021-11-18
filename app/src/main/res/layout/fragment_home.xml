@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Home">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="195dp"
+        android:background="@drawable/map">
+
+        <Button
+            android:id="@+id/manpao"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/home_button"
+            android:drawableTop="@drawable/icon_run"
+            android:text="漫跑"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="195dp"
+        android:background="@drawable/run">
+
+        <Button
+            android:id="@+id/free_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/icon_run"
+            android:text="自由跑"
+            android:paddingTop="12dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/home_button2" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="28dp"
+            android:background="@drawable/icon_pm"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="漫跑榜单"
+            android:layout_weight="1"
+            android:textColor="@color/denglu_bj"
+            android:textSize="20sp" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/icon_vido"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="28sp"
+            android:text="跑步视频"
+            android:textColor="@color/denglu_bj"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
