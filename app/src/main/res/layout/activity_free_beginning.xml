@@ -43,19 +43,19 @@
             android:layout_height="30dp">
             <TextView
                 android:layout_width="0dp"
-                android:text="总距离"
+                android:text="已跑公里"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_height="match_parent" />
             <TextView
                 android:layout_weight="1"
-                android:text="当前速度"
+                android:text="平均配速"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:layout_height="match_parent" />
             <TextView
                 android:layout_weight="1"
-                android:text="时间"
+                android:text="时长"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:layout_height="match_parent" />
@@ -63,23 +63,118 @@
 
     </LinearLayout>
 
-
-    <com.amap.api.maps.MapView
-        android:id="@+id/map_view2"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="80dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
+        <com.amap.api.maps.MapView
+            android:id="@+id/map_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.amap.api.maps.MapView>
+        <LinearLayout
+                android:id="@+id/tanchu"
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                android:orientation="vertical"
+                android:layout_marginTop="100dp"
+                android:visibility="invisible"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/jieshu"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="跑步结束"
+                    android:textSize="40sp"
+                    android:gravity="center"
+                    android:background="@drawable/run_info"/>
+                <TextView
+                    android:id="@+id/xxi"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:text=""
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="太棒了! 跑步结束,再接再厉!"
+                    android:textSize="24sp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    />
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/run_info2"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
 
-    </com.amap.api.maps.MapView>
+                        <TextView
+                            android:id="@+id/distance2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"/>
 
-    <Button
-        android:id="@+id/stoprun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/home_button2"
-        android:text="结束"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
-        android:textSize="20sp"/>
+                        <TextView
+                            android:id="@+id/speed2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/timer2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:text="已跑公里"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="平均配速"
+                            android:layout_width="0dp"
+                            android:gravity="center"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="时长"
+                            android:layout_width="0dp"
+                            android:gravity="center"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/stoprun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_button2"
+            android:text="结束"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="520dp"
+            android:textSize="20sp"/>
+    </FrameLayout>
+
+
 </RelativeLayout>

@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
 
     private LatLng currentLatLng;
     private long totalDistance=0;
+    private String sppeed;
     Chronometer timer;
 
 
@@ -83,13 +85,27 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         initMap(savedInstanceState);
 
         mLocationClient.startLocation();
+        LinearLayout tanchu=findViewById(R.id.tanchu);
+        TextView xxi=findViewById(R.id.xxi);
+        TextView distance2=findViewById(R.id.distance2);
+        TextView speed2=findViewById(R.id.speed2);
+        TextView timer2=findViewById(R.id.timer2);
         Button stoprun=findViewById(R.id.stoprun);
         stoprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 timer.stop();
-//                mLocationClient.stopLocation();
-//                mLocationClient.onDestroy();
+                tanchu.setVisibility(View.VISIBLE);
+                mLocationClient.stopLocation();
+                mLocationClient.onDestroy();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
+                //获取当前时间
+                Date date = new Date(System.currentTimeMillis());
+                xxi.setText(simpleDateFormat.format(date));
+                //公里数、配速、时长
+                distance2.setText(totalDistance/1000+"km");
+                speed2.setText(sppeed);
+                timer2.setText(timer.getText());
             }
         });
     }
@@ -168,7 +184,6 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                         //官方文档有更详细的说明
                         aMap.addPolyline(new PolylineOptions().add(lastLatLng,currentLatLng).width(10).color(Color.argb(255,1,1,1)));
                         totalDistance +=movedDisdance;
-                        showMsg("好的");
                     }
                     @Override
                     public void onCameraChangeFinish(final CameraPosition cameraPosition) {
@@ -181,12 +196,9 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                 //界面显示总里程和速度
                 TextView s=findViewById(R.id.distance);
                 TextView sp=findViewById(R.id.speed);
-                s.setText(totalDistance+"");
-                sp.setText(aMapLocation.getSpeed()+"");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
-                //获取当前时间
-                Date date = new Date(System.currentTimeMillis());
-
+                s.setText(totalDistance/1000+"km");
+                sp.setText(aMapLocation.getSpeed()+"m/s");
+                sppeed= (String) sp.getText();
 //                mLocationClient.stopLocation();
                 if(mListener !=null){
                     mListener.onLocationChanged(aMapLocation);
@@ -278,10 +290,5 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         }
         mLocationClient = null;
     }
-
-
-
-
-
 
 }

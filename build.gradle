@@ -5,6 +5,8 @@ buildscript {
         jcenter()
         maven {
             url "https://mvn.mob.com/android"
+//            url "https://maven.aliyun.com/repository/jcenter"
+
         }
     }
     dependencies {
@@ -17,6 +19,11 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url "https://mvn.mob.com/android"
+//            url "https://maven.aliyun.com/repository/jcenter"
+
+        }
         google()
         jcenter()
     }
