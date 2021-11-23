@@ -28,16 +28,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
-        <activity android:name=".free_beginningActivity">
-
-        </activity>
-        <activity android:name=".free_runActivity2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".roam_runActivity"></activity>
+        <activity android:name=".free_beginningActivity" />
+        <activity android:name=".free_runActivity2" />
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -52,13 +45,11 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
         </activity>
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-
-
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity> <!-- 定位service -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 设置高德Key -->
         <meta-data

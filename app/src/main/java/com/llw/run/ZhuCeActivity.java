@@ -23,7 +23,16 @@ import android.os.Bundle;
 
 import com.mob.MobSDK;
 
-public class ZhuCeActivity extends AppCompatActivity implements OnClickListener  {
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import static java.util.Locale.US;
+
+public class ZhuCeActivity extends AppCompatActivity   {
     String APPKEY = "34b103c906c35";
     String APPSECRETE = "54f47d66da37f091ead750c9e3c21416";
     // 手机号输入框
@@ -31,9 +40,15 @@ public class ZhuCeActivity extends AppCompatActivity implements OnClickListener 
     // 验证码输入框
     private EditText inputCodeEt;
     // 获取验证码按钮
-    private Button requestCodeBtn;
     // 注册按钮
-    private Button commitBtn;
+    private Button sub;
+    private String mQq;
+    private String mPwd;
+    private static final int LOAD_SUCCESS =1 ;
+    private static final int LOAD_ERROR =2 ;
+    private EditText mQqNum;
+    private EditText mQqPwd;
+
     int i=30;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,163 +57,148 @@ public class ZhuCeActivity extends AppCompatActivity implements OnClickListener 
             getSupportActionBar().hide();
         }
         setContentView(R.layout.zhu_ce);
-        init();
-    }
-    private void init() {
-        inputPhoneEt = (EditText) findViewById(R.id.login_input_phone_et);
-        inputCodeEt = (EditText) findViewById(R.id.login_input_code_et);
-        requestCodeBtn = (Button) findViewById(R.id.login_request_code_btn);
-        commitBtn = (Button) findViewById(R.id.login_commit_btn);
-
-        requestCodeBtn.setOnClickListener(this);
-        commitBtn.setOnClickListener(this);
-// 启动短信验证sdk
-
-        MobSDK.submitPolicyGrantResult(true, null);
-        EventHandler eventHandler = new EventHandler(){
+        mQqNum= (EditText) findViewById(R.id.login_input_phone_et);
+        mQqPwd = (EditText) findViewById(R.id.password);
+        sub = (Button) findViewById(R.id.login_commit_btn);
+        sub.setOnClickListener(new OnClickListener() {
             @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                handler.sendMessage(msg);
-            }
-        };
-//注册回调监听接口
-        SMSSDK.registerEventHandler(eventHandler);
-    }
-    @Override
-    public void onClick(View v) {
-        String phoneNums = inputPhoneEt.getText().toString();
-        switch (v.getId()) {
-            case R.id.login_request_code_btn:
-// 1. 通过规则判断手机号
-                if (!judgePhoneNums(phoneNums)) {
-                    return;
-                } // 2. 通过sdk发送短信验证
-                SMSSDK.getVerificationCode("86", phoneNums);
-// 3. 把按钮变成不可点击，并且显示倒计时（正在获取）
-                requestCodeBtn.setClickable(false);
-                requestCodeBtn.setText("重新发送(" + i + ")");
-                new Thread(new Runnable() {
+            public void onClick(View v) {
+                mQq = mQqNum.getText().toString().trim();
+                mPwd = mQqPwd.getText().toString().trim();
+                //mCb_rember.getText().toString().trim();
+                if (TextUtils.isEmpty(mQq)||TextUtils.isEmpty(mPwd)){
+                    showMsg("账号或者密码为空");
+                }
+                sub.setEnabled(false);
+                new Thread(){
                     @Override
                     public void run() {
-                        for (; i > 0; i--) {
-                            handler.sendEmptyMessage(-9);
-                            if (i <= 0) {
-                                break;
+                        try {
+//                    Thread.sleep(5000);
+//                            String path="http://47.113.226.119:8080/register";
+                            String path="http://10.21.234.20:8080/register";
+                            URL url = new URL(path);
+                            //打开httpurlconnection
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");              //设置POST方式获取数据
+                            conn.setConnectTimeout(5000);              //设置连接超时时间5秒
+                            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
+                            //将数据进行编码,然后会自动的将该数据放到post中传到后台
+                            String data="username="+ URLEncoder.encode(mQq,"utf-8")+"&password="+ URLEncoder.encode(mPwd,"utf-8");
+//                            String data="userID="+ URLEncoder.encode("123456","utf-8")+"&userPwd="+URLEncoder.encode("123456","utf-8")+"&userName="+URLEncoder.encode("123456","utf-8")+"&phoneNumber="+URLEncoder.encode("123456","utf-8");
+                            //指定长度
+                            conn.setRequestProperty("Content-length",String.valueOf(data.length()));
+                            conn.setDoOutput(true); //指定输出模式
+                            conn.getOutputStream().write(data.getBytes());  //将要传递的数据写入输出流
+                            int code = conn.getResponseCode();         // 获取response状态，200表示成功获取资源，404表示资源不存在
+                            if (code==200){
+                                InputStream is=conn.getInputStream();
+                                BufferedReader br=new BufferedReader(new InputStreamReader(is));
+                                StringBuffer sb=new StringBuffer();
+                                String len=null;
+                                while((len=br.readLine())!=null){
+                                    sb.append(len);
+                                }
+                                String result=sb.toString();
+//                                showMsg(result);
+                                Log.d("ZhuCeActivity", result);
                             }
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("ZhuCeActivity", "cuowu");
+
+//                            showMsg("不成功");
+
+
                         }
-                        handler.sendEmptyMessage(-8);
                     }
-                }).start();
-                break;
-            case R.id.login_commit_btn:
-//将收到的验证码和手机号提交再次核对
-                SMSSDK.submitVerificationCode("86", phoneNums, inputCodeEt
-                        .getText().toString());
-//createProgressBar();
-                break;
-        }
-    }
-    /**
-     *
-     */
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.what == -9) {
-                requestCodeBtn.setText("重新发送(" + i + ")");
-            } else if (msg.what == -8) {
-                requestCodeBtn.setText("获取验证码");
-                requestCodeBtn.setClickable(true);
-                i = 30;
-            } else {
-                int event = msg.arg1;
-                int result = msg.arg2;
-                Object data = msg.obj;
-                Log.e("event", "event=" + event);
-                if (result == SMSSDK.RESULT_COMPLETE) {
-// 短信注册成功后，返回MainActivity,然后提示
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {// 提交验证码成功
-                        Toast.makeText(getApplicationContext(), "提交验证码成功",
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ZhuCeActivity.this,
-                                MainActivity.class);
-                        startActivity(intent);
-                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        Toast.makeText(getApplicationContext(), "正在获取验证码",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        ((Throwable) data).printStackTrace();
-                    }
-                }
+                }.start();
+
+
             }
-        }
-    };
-    /**
-     * 判断手机号码是否合理
-     *
-     * @param phoneNums
-     */
-    private boolean judgePhoneNums(String phoneNums) {
-        if (isMatchLength(phoneNums, 11)
-                && isMobileNO(phoneNums)) {
-            return true;
-        }
-        Toast.makeText(this, "手机号码输入有误！",Toast.LENGTH_SHORT).show();
-        return false;
+        });
+
     }
-    /**
-     * 判断一个字符串的位数
-     * @param str
-     * @param length
-     * @return
-     */
-    public static boolean isMatchLength(String str, int length) {
-        if (str.isEmpty()) {
-            return false;
-        } else {
-            return str.length() == length ? true : false;
-        }
-    }
-    /**
-     * 验证手机格式
-     */
-    public static boolean isMobileNO(String mobileNums) {
-        /*
-         * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
-         * 联通：130、131、132、152、155、156、185、186 电信：133、153、180、189、（1349卫通）
-         * 总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
-         */
-        String telRegex = "[1][358]\\d{9}";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (TextUtils.isEmpty(mobileNums))
-            return false;
-        else
-            return mobileNums.matches(telRegex);
-    }
-    /**
-     * progressbar
-     */
-    private void createProgressBar() {
-        FrameLayout layout = (FrameLayout) findViewById(android.R.id.content);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.gravity = Gravity.CENTER;
-        ProgressBar mProBar = new ProgressBar(this);
-        mProBar.setLayoutParams(layoutParams);
-        mProBar.setVisibility(View.VISIBLE);
-        layout.addView(mProBar);
-    }
-    @Override
-    protected void onDestroy() {
-        SMSSDK.unregisterAllEventHandler();
-        super.onDestroy();
+
+    //    //点击注册调用
+//    public void login(View view){
+//
+//        //Toast.makeText(this,"点击了提交",Toast.LENGTH_SHORT).show();
+//        mQq = mQqNum.getText().toString().trim();
+//        mPwd = mQqPwd.getText().toString().trim();
+//        //mCb_rember.getText().toString().trim();
+//        if (TextUtils.isEmpty(mQq)||TextUtils.isEmpty(mPwd)){
+//            Toast.makeText(this,"账号或者密码为空",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        //这里设置按钮不能点，应为一直点，就一直发送请求，会造成一直请求数据
+//        sub.setEnabled(false);
+//
+//        /**
+//         * 点击按钮事件，在主线程中开启一个子线程进行网络请求
+//         * （因为在4.0只有不支持主线程进行网络请求，所以一般情况下，建议另开启子线程进行网络请求等耗时操作）。
+//         */
+//        //请求网络
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+////                    showMsg("2");
+////                    Thread.sleep(5000);
+////                    String path="http://192.168.1.111:10010/aos/pdaLogin.jhtml";
+//                    String path="10.21.234.20:8080/register";
+//                    URL url = new URL(path);
+//                    //打开httpurlconnection
+//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                    conn.setRequestMethod("POST");              //设置POST方式获取数据
+//                    conn.setConnectTimeout(5000);              //设置连接超时时间5秒
+//
+//                    conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
+//                    //将数据进行编码,然后会自动的将该数据放到post中传到后台
+//                    String data="username="+ URLEncoder.encode(mQq,"utf-8")+"&password="+ URLEncoder.encode(mPwd,"utf-8");
+//                    //指定长度
+//                    conn.setRequestProperty("Content-length",String.valueOf(data.length()));
+//                    /**
+//                     * post是以流的方式写给服务器
+//                     */
+//                    conn.setDoOutput(true); //指定输出模式
+//                    conn.getOutputStream().write(data.getBytes());  //将要传递的数据写入输出流
+//
+//                    int code = conn.getResponseCode();         // 获取response状态，200表示成功获取资源，404表示资源不存在
+//                    if (code==200){
+//
+//                        InputStream is=conn.getInputStream();
+//
+//                        BufferedReader br=new BufferedReader(new InputStreamReader(is));
+//                        StringBuffer sb=new StringBuffer();
+//                        String len=null;
+//
+//                        while((len=br.readLine())!=null){
+//                            sb.append(len);
+//                        }
+//                        String result=sb.toString();
+//                        /**
+//                         * 这里就不用handler方式来处理子线程的数据了
+//                         */
+////                        runToastAnyThread(result);
+//                        showMsg(result);
+////                        Log.d("ZhuCeActivity", result);
+////                        Log.d("ZhuCeActivity", "哇哈哈哈哈哈哈哈哈哈");
+//
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    showMsg("不成功");
+//
+//
+//                }
+//            }
+//        }.start();
+//
+//    }
+    private void showMsg(String msg){
+        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
     }
 
 

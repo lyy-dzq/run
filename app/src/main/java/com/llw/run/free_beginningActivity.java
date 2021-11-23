@@ -1,4 +1,4 @@
-package com.llw.run;
+ package com.llw.run;
 import java.util.Date;
 
 import android.os.SystemClock;
@@ -48,6 +48,8 @@ import java.util.Date;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+
+
 
 public class free_beginningActivity extends AppCompatActivity implements AMapLocationListener,LocationSource {
 

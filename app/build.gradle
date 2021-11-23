@@ -57,6 +57,10 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     //Material库
     implementation 'com.google.android.material:material:1.4.0'
+    //调用注册
+//    implementation 'commons-httpclient:commons-httpclient:3.1'
+//    implementation 'com.alibaba:fastjson:1.2.44'
+
 
 }
 // 添加插件

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.llw.run.R;
+import com.llw.run.free_runActivity2;
 
 public class HomeFragment extends Fragment {
 
@@ -27,12 +28,14 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+
+
         Button bt_free=root.findViewById(R.id.free_run);
         bt_free.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), free_run_Activity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), free_runActivity2.class);
+                startActivity(intent);
 
             }
         });
