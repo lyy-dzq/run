@@ -20,6 +20,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +30,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
-        <activity android:name=".roam_runActivity"></activity>
+        <activity android:name=".three_roamActivity"></activity>
+        <activity android:name=".two_roamActivity" />
+        <activity android:name=".roam_runActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity android:name=".free_beginningActivity" />
         <activity android:name=".free_runActivity2" />
 
@@ -39,17 +49,15 @@
             android:label="@string/title_activity_bottom_navigation" />
         <activity android:name=".Home" />
         <activity android:name=".ZhaohuiMimaActivity" />
-        <activity android:name=".ZhuCeActivity">
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-        </activity>
+        <activity android:name=".ZhuCeActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity> <!-- 定位service -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 设置高德Key -->
         <meta-data

@@ -198,7 +198,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                 //界面显示总里程和速度
                 TextView s=findViewById(R.id.distance);
                 TextView sp=findViewById(R.id.speed);
-                s.setText(totalDistance/1000+"km");
+                s.setText(totalDistance+"m");
                 sp.setText(aMapLocation.getSpeed()+"m/s");
                 sppeed= (String) sp.getText();
 //                mLocationClient.stopLocation();

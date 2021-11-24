@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.llw.run.R;
 import com.llw.run.free_runActivity2;
+import com.llw.run.roam_runActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -28,7 +29,14 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-
+        Button bt_roam=root.findViewById(R.id.manpao);
+        bt_roam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), roam_runActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button bt_free=root.findViewById(R.id.free_run);
         bt_free.setOnClickListener(new View.OnClickListener() {

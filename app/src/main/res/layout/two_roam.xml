@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background1"
-    tools:context=".roam_runActivity">
+    android:layout_width="match_parent"
+    android:background="@drawable/background2"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_marginTop="110dp"
         android:orientation="horizontal">
 
-<!--        <Button-->
-<!--            android:id="@+id/pre"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginLeft="15dp"-->
-<!--            android:background="@drawable/home_button2"-->
-<!--            android:text="<"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="44sp" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/pre"-->
+        <!--            android:layout_width="60dp"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginLeft="15dp"-->
+        <!--            android:background="@drawable/home_button2"-->
+        <!--            android:text="<"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="44sp" />-->
         <Button
             android:id="@+id/pre"
             android:layout_width="40dp"
@@ -36,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="西湖"
+            android:text="天安门"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="40sp" />
@@ -66,5 +63,4 @@
         android:background="@drawable/zhaohui"
         android:text="进入场景"
         android:textColor="@color/white" />
-
 </LinearLayout>
