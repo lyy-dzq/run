@@ -179,12 +179,14 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                 LatLng lastLatLng = currentLatLng;
                 currentLatLng = new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 float movedDisdance=AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
+//                float movedDisdance=Math.round(AMap.GeometryUtil.distance(currentLatLng,lastLatLng));
                 //绘制移动路线
                 aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(final CameraPosition cameraPosition) {
                         //官方文档有更详细的说明
                         aMap.addPolyline(new PolylineOptions().add(lastLatLng,currentLatLng).width(10).color(Color.argb(255,1,1,1)));
+
                         totalDistance +=movedDisdance;
                     }
                     @Override

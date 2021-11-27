@@ -30,7 +30,8 @@ public class roam_runActivity extends AppCompatActivity {
         xihu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(roam_runActivity.this, enter_roam1Activity.class);
+                startActivity(intent);
             }
         });
     }
