@@ -71,6 +71,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
     private long totalDistance=0;
     private String sppeed;
     Chronometer timer;
+    float movedDisdance;
 
 
     @Override
@@ -178,7 +179,10 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                 }
                 LatLng lastLatLng = currentLatLng;
                 currentLatLng = new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
-                float movedDisdance=AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
+                if(aMapLocation.getSpeed()!=0&&AMapUtils.calculateLineDistance(currentLatLng,lastLatLng)>0){
+                    movedDisdance=AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
+                }
+
 //                float movedDisdance=Math.round(AMap.GeometryUtil.distance(currentLatLng,lastLatLng));
                 //绘制移动路线
                 aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {

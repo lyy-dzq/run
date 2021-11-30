@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
+        android:name=".Data"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,13 +32,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
         <activity android:name=".xihuActivity">
+
+
+        </activity>
+        <activity android:name=".enter_roam1Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".enter_roam1Activity" />
         <activity android:name=".three_roamActivity" />
         <activity android:name=".two_roamActivity" />
         <activity android:name=".roam_runActivity">
@@ -61,7 +65,11 @@
         <activity android:name=".ZhaohuiMimaActivity" />
         <activity android:name=".ZhuCeActivity" />
         <activity android:name=".MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity> <!-- 定位service -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 设置高德Key -->
         <meta-data
