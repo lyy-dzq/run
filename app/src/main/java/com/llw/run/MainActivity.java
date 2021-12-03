@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
+        final Data app = (Data)getApplication();
         setContentView(R.layout.activity_main);
         Button bt1 = findViewById(R.id.denglu);
         Button bt2 = findViewById(R.id.zhuce);
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 String ok = "登录成功";
                 String fail = "登录失败";
                 if (username1.equals("152") && password1.equals("123")) {
+                    app.setinto(username1);
                     Toast.makeText(MainActivity.this,ok, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, BottomNavigationActivity.class);
                     startActivity(intent);

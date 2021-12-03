@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
-public class enter_roam1Activity extends AppCompatActivity {
+public class enter_roam2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +20,14 @@ public class enter_roam1Activity extends AppCompatActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        setContentView(R.layout.activity_enter_roam1);
+        setContentView(R.layout.activity_enter_roam2);
         final Data app = (Data)getApplication();
 
         Button enterroam=findViewById(R.id.enterroam);
         enterroam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(enter_roam1Activity.this, xihuActivity.class);
+                Intent intent = new Intent(enter_roam2Activity.this, tian_an_menActivity.class);
                 startActivity(intent);
             }
         });

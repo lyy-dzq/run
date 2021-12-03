@@ -57,6 +57,9 @@ public class ZhuCeActivity extends AppCompatActivity   {
             getSupportActionBar().hide();
         }
         setContentView(R.layout.zhu_ce);
+        //
+        final Data app = (Data)getApplication();
+
         mQqNum= (EditText) findViewById(R.id.login_input_phone_et);
         mQqPwd = (EditText) findViewById(R.id.password);
         sub = (Button) findViewById(R.id.login_commit_btn);
@@ -102,6 +105,7 @@ public class ZhuCeActivity extends AppCompatActivity   {
                                 String result=sb.toString();
 //                                showMsg(result);
                                 Log.d("ZhuCeActivity", result);
+                                app.setinto(mQq);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -120,83 +124,7 @@ public class ZhuCeActivity extends AppCompatActivity   {
 
     }
 
-    //    //点击注册调用
-//    public void login(View view){
-//
-//        //Toast.makeText(this,"点击了提交",Toast.LENGTH_SHORT).show();
-//        mQq = mQqNum.getText().toString().trim();
-//        mPwd = mQqPwd.getText().toString().trim();
-//        //mCb_rember.getText().toString().trim();
-//        if (TextUtils.isEmpty(mQq)||TextUtils.isEmpty(mPwd)){
-//            Toast.makeText(this,"账号或者密码为空",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        //这里设置按钮不能点，应为一直点，就一直发送请求，会造成一直请求数据
-//        sub.setEnabled(false);
-//
-//        /**
-//         * 点击按钮事件，在主线程中开启一个子线程进行网络请求
-//         * （因为在4.0只有不支持主线程进行网络请求，所以一般情况下，建议另开启子线程进行网络请求等耗时操作）。
-//         */
-//        //请求网络
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                try {
-////                    showMsg("2");
-////                    Thread.sleep(5000);
-////                    String path="http://192.168.1.111:10010/aos/pdaLogin.jhtml";
-//                    String path="10.21.234.20:8080/register";
-//                    URL url = new URL(path);
-//                    //打开httpurlconnection
-//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                    conn.setRequestMethod("POST");              //设置POST方式获取数据
-//                    conn.setConnectTimeout(5000);              //设置连接超时时间5秒
-//
-//                    conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
-//                    //将数据进行编码,然后会自动的将该数据放到post中传到后台
-//                    String data="username="+ URLEncoder.encode(mQq,"utf-8")+"&password="+ URLEncoder.encode(mPwd,"utf-8");
-//                    //指定长度
-//                    conn.setRequestProperty("Content-length",String.valueOf(data.length()));
-//                    /**
-//                     * post是以流的方式写给服务器
-//                     */
-//                    conn.setDoOutput(true); //指定输出模式
-//                    conn.getOutputStream().write(data.getBytes());  //将要传递的数据写入输出流
-//
-//                    int code = conn.getResponseCode();         // 获取response状态，200表示成功获取资源，404表示资源不存在
-//                    if (code==200){
-//
-//                        InputStream is=conn.getInputStream();
-//
-//                        BufferedReader br=new BufferedReader(new InputStreamReader(is));
-//                        StringBuffer sb=new StringBuffer();
-//                        String len=null;
-//
-//                        while((len=br.readLine())!=null){
-//                            sb.append(len);
-//                        }
-//                        String result=sb.toString();
-//                        /**
-//                         * 这里就不用handler方式来处理子线程的数据了
-//                         */
-////                        runToastAnyThread(result);
-//                        showMsg(result);
-////                        Log.d("ZhuCeActivity", result);
-////                        Log.d("ZhuCeActivity", "哇哈哈哈哈哈哈哈哈哈");
-//
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    showMsg("不成功");
-//
-//
-//                }
-//            }
-//        }.start();
-//
-//    }
+
     private void showMsg(String msg){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
     }

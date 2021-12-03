@@ -67,6 +67,9 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
     List<LatLng> latLngs10 = new ArrayList<LatLng>();//终点雷峰塔
     private String sppeed;
     Chronometer timer;
+    //
+    final Data app = (Data)getApplication();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,6 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
         }
         setContentView(R.layout.activity_xihu);
 
-        final Data app = (Data)getApplication();
 
 
         //获取地图控件引用
@@ -98,7 +100,6 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
         stoprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMsg(app.getA2());
                 timer.stop();
                 tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
@@ -669,7 +670,15 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
 
                 currentLatLng = new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 if(aMapLocation.getSpeed()!=0&&AMapUtils.calculateLineDistance(currentLatLng,lastLatLng)>0){
-                     movedDisdance= AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
+                    if(app.getA()=="1:1"){
+                        movedDisdance= AMapUtils.calculateLineDistance(currentLatLng,lastLatLng);
+                    }else if(app.getA()=="1:2"){
+                        movedDisdance= (AMapUtils.calculateLineDistance(currentLatLng,lastLatLng))*2;
+                    }else if(app.getA()=="1:5"){
+                        movedDisdance= AMapUtils.calculateLineDistance(currentLatLng,lastLatLng)*5;
+                    }else  if(app.getA()=="1:10"){
+                        movedDisdance= AMapUtils.calculateLineDistance(currentLatLng,lastLatLng)*10;
+                    }
                     totalDistance +=movedDisdance;
 
                 }

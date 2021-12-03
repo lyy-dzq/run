@@ -34,5 +34,14 @@ public class two_roamActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //enter
+        Button xihu=findViewById(R.id.enter_roam);
+        xihu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(two_roamActivity.this, enter_roam2Activity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

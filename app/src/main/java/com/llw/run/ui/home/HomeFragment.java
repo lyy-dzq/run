@@ -22,13 +22,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-//       final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        //漫跑点击事件
         Button bt_roam=root.findViewById(R.id.manpao);
         bt_roam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +31,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+       //自由跑点击事件
         Button bt_free=root.findViewById(R.id.free_run);
         bt_free.setOnClickListener(new View.OnClickListener() {
             @Override

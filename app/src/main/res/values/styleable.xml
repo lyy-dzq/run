@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleScaleView">
+        <attr name="firstColor" format="color|reference" />
+        <attr name="secondColor" format="color|reference" />
+        <attr name="thirdlyColor" format="color|reference" />
+        <attr name="circleWidth" format="dimension" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+</resources>
