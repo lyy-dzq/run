@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ge_renActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="个人信息"
+        android:gravity="center"
+        android:textSize="28dp"
+        android:textColor="@color/black"/>
+    <LinearLayout
+        android:id="@+id/toux"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="100dp">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:text="头像"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/picture"
+            android:layout_gravity="center_vertical"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            />
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/youjiantou"
+            android:layout_height="30dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CCCCCC	"/>
+    <LinearLayout
+        android:id="@+id/nc_all"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="昵称"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/nicheng"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/zhuce_bj"
+            android:text="152"/>
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/youjiantou"
+            android:layout_height="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/xb"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="性别" />
+        <TextView
+            android:id="@+id/x_b"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/zhuce_bj"
+            android:text="男"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:src="@drawable/youjiantou" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CCCCCC	"/>
+
+    <LinearLayout
+        android:id="@+id/sri"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="生日"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/sri2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/zhuce_bj"
+            android:text="1990-12-11日"/>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/youjiantou"
+            android:layout_height="30dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CCCCCC	"/>
+    <LinearLayout
+        android:id="@+id/qianm"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="个性签名"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/zhuce_bj"
+            android:text="无"/>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/youjiantou"
+            android:layout_height="30dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

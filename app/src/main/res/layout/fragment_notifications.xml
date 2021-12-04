@@ -33,7 +33,6 @@
             android:layout_marginBottom="15dp"
             android:text="张三"/>
 
-
     </RelativeLayout>
 
     //累积公里和获得勋章
@@ -100,6 +99,7 @@
         android:layout_gravity="center"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/geren"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
@@ -128,6 +128,7 @@
             android:layout_height="0.5dp"
             android:background="#090808"/>
         <LinearLayout
+            android:id="@+id/paobu"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
@@ -160,6 +161,7 @@
 
             android:background="#090808"/>
         <LinearLayout
+            android:id="@+id/shezhi"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">

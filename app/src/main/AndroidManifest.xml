@@ -28,13 +28,37 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
-        <activity android:name=".xzActivity"></activity>
-        <activity android:name=".leiji_Activity" />
-        <activity android:name=".tian_an_menActivity" />
-        <activity android:name=".enter_roam2Activity">
+        <activity android:name=".changeActivity"></activity>
+        <activity android:name=".zhang_haoActivity" />
+        <activity android:name=".guan_yuActivity" />
+        <activity
+            android:name=".she_zhiActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".qian_mActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ni_chengActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ge_renActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".xzActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".leiji_Activity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tian_an_menActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".enter_roam2Activity"
+            android:launchMode="singleTask">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -43,8 +67,12 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".xihuActivity" />
-        <activity android:name=".enter_roam1Activity">
+        <activity
+            android:name=".xihuActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".enter_roam1Activity"
+            android:launchMode="singleTask">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -53,9 +81,15 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".three_roamActivity" />
-        <activity android:name=".two_roamActivity" />
-        <activity android:name=".roam_runActivity">
+        <activity
+            android:name=".three_roamActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".two_roamActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".roam_runActivity"
+            android:launchMode="singleTask">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -64,14 +98,34 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".free_beginningActivity" />
-        <activity android:name=".free_runActivity2" />
+        <activity
+            android:name=".free_beginningActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".free_runActivity2"
+            android:launchMode="singleTask" />
 
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".BottomNavigationActivity"
-            android:label="@string/title_activity_bottom_navigation">
+            android:label="@string/title_activity_bottom_navigation"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ZhaohuiMimaActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ZhuCeActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -79,15 +133,6 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".ZhaohuiMimaActivity" />
-        <activity android:name=".ZhuCeActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- 定位service -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 设置高德Key -->
         <meta-data

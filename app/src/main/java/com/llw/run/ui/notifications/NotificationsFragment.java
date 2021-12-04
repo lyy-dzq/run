@@ -21,7 +21,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.llw.run.Data;
 import com.llw.run.R;
 import com.llw.run.enter_roam1Activity;
+import com.llw.run.ge_renActivity;
 import com.llw.run.leiji_Activity;
+import com.llw.run.she_zhiActivity;
 import com.llw.run.xihuActivity;
 import com.llw.run.xzActivity;
 
@@ -39,6 +41,7 @@ public class NotificationsFragment extends Fragment {
         ImageView hBack=root.findViewById(R.id.h_back);
         ImageView hHead=root.findViewById(R.id.h_head);
         final Data app = (Data)getApplication();
+
         //设置背景磨砂效果
         Glide.with(getActivity()).load(R.drawable.touxiang)
                 .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))
@@ -65,6 +68,25 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), xzActivity.class);
+                startActivity(intent);
+            }
+        });
+        //个人信息
+        LinearLayout geren=root.findViewById(R.id.geren);
+        geren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ge_renActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //设置
+        LinearLayout shezhi=root.findViewById(R.id.shezhi);
+        shezhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), she_zhiActivity.class);
                 startActivity(intent);
             }
         });
