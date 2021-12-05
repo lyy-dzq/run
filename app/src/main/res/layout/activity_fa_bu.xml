@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fa_buActivity">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_images"
+        android:id="@+id/noScrollgridview"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

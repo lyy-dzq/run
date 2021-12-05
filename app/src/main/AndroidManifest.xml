@@ -32,7 +32,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
-        <activity android:name=".fa_buActivity"></activity>
+
+        <activity android:name=".fa_buActivity" />
         <activity android:name=".changeActivity" />
         <activity android:name=".zhang_haoActivity" />
         <activity android:name=".guan_yuActivity" />
