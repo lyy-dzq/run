@@ -8,6 +8,14 @@ public class Data extends Application {
     private String a2;
     private String b;  //天安门
     private String b2;
+    private String uid;
+    //uid
+    public String getUid(){
+        return this.uid;
+    }
+    public void setUid(String s){
+        this.uid= s;
+    }
     //用户名
     public String getinto(){
         return this.suer_into;

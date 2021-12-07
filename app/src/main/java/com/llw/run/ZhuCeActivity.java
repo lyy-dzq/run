@@ -35,10 +35,7 @@ import static java.util.Locale.US;
 public class ZhuCeActivity extends AppCompatActivity   {
     String APPKEY = "34b103c906c35";
     String APPSECRETE = "54f47d66da37f091ead750c9e3c21416";
-    // 手机号输入框
-    private EditText inputPhoneEt;
-    // 验证码输入框
-    private EditText inputCodeEt;
+
     // 获取验证码按钮
     // 注册按钮
     private Button sub;

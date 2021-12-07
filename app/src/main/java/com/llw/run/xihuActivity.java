@@ -113,6 +113,7 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
                 speed2.setText(sppeed);
                 timer2.setText(timer.getText());
                 stoprun.setVisibility(View.INVISIBLE);
+                
             }
         });
 
