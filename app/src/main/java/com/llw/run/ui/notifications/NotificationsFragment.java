@@ -20,6 +20,7 @@ import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.llw.run.Data;
 import com.llw.run.R;
+import com.llw.run.RecordActivity;
 import com.llw.run.enter_roam1Activity;
 import com.llw.run.ge_renActivity;
 import com.llw.run.leiji_Activity;
@@ -77,6 +78,15 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ge_renActivity.class);
+                startActivity(intent);
+            }
+        });
+        //跑步
+        LinearLayout paobu=root.findViewById(R.id.paobu);
+        paobu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), RecordActivity.class);
                 startActivity(intent);
             }
         });

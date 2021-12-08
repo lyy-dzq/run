@@ -25,7 +25,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order=mOrderList.get(position);
-        holder.orderImage.setImageResource(order.getImageId());
+        holder.orderImage.setImageBitmap(order.getImageId());
         holder.orderName.setText(order.getUsername());
         holder.orderMile.setText(order.getMile());
 

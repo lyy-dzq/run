@@ -32,7 +32,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.漫跑">
-        <activity android:name=".pai_hangActivity"></activity>
+        <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".pai_hangActivity" />
         <activity android:name=".jiao_cActivity" />
         <activity android:name=".fa_buActivity" />
         <activity android:name=".changeActivity" />
@@ -114,11 +115,13 @@
             android:name=".BottomNavigationActivity"
             android:label="@string/title_activity_bottom_navigation"
             android:launchMode="singleTask">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".ZhaohuiMimaActivity"
@@ -129,13 +132,11 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity> <!-- 定位service -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 设置高德Key -->
         <meta-data

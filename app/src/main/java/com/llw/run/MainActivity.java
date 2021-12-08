@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                     sb.append(len);
                                 }
                                 String result=sb.toString();
-                                showMsg(result);
+
 //                                showMsg(result);
                                 Log.d("ZhuCeActivity", result);
                                 app.setinto(mQq2);
@@ -111,23 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        bt1.setOnClickListener(new View.OnClickListener() { //登录
-//            @Override
-//            public void onClick(View v) {
-//
-//                String ok = "登录成功";
-//                String fail = "登录失败";
-////调用后端接口
-//                mQq = mQqNum.getText().toString().trim();
-//                mPwd = mQqPwd.getText().toString().trim();
-//                //mCb_rember.getText().toString().trim();
-//                if (TextUtils.isEmpty(mQq) || TextUtils.isEmpty(mPwd)) {
-//                    showMsg("账号或者密码为空");
-//                }
-//                bt1.setEnabled(false);
-//
-//            }
-//        });
 
                 //注册
                 bt2.setOnClickListener(new View.OnClickListener() {
