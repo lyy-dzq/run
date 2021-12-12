@@ -38,6 +38,11 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.route.DistanceResult;
 import com.amap.api.services.route.DistanceSearch;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +57,7 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
     public AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
+    final Data app = (Data)getApplication();
     //跑步数据
     //位置更改监听
     private LocationSource.OnLocationChangedListener mListener;
@@ -72,7 +78,6 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
     private String sppeed;
     Chronometer timer;
     //
-    final Data app = (Data)getApplication();
 
 
     @Override
@@ -82,8 +87,6 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_tian_an_men);
-        final Data app2 = (Data)getApplication();
-        totalDistance=app2.getJixu();
         Log.d("哇哈哈哈哈哈哈哈哈哈哈", totalDistance+"");
 
 
@@ -93,6 +96,11 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
 
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
         mMapView.onCreate(savedInstanceState);
+
+        final Data app3 = (Data)getApplication();
+        totalDistance=app3.getJixu();
+
+
         //不显示
         initLocation();
         mLocationClient.startLocation();
@@ -107,6 +115,38 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
             @Override
             public void onClick(View v) {
                 timer.stop();
+//调用
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            String JSON_URL="http://10.21.234.20:8080/";
+                            JSON_URL=JSON_URL+app3.getUid()+"/insertUserRomanticRun?"+"totalMile="+totalDistance/1000+"&runTime="+timer.getText();
+                            Log.d("漫跑", JSON_URL);
+                            URL url = new URL(JSON_URL);
+                            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+                            urlConn.setRequestMethod("GET");
+                            urlConn.setConnectTimeout(5000);
+                            urlConn.setReadTimeout(5000);
+//                    int code = urlConn.getResponseCode();
+//                    if (code==200){
+                            InputStream is=urlConn.getInputStream();
+                            BufferedReader br=new BufferedReader(new InputStreamReader(is));
+                            StringBuffer sb=new StringBuffer();
+                            String len=null;
+                            while((len=br.readLine())!=null){
+                                sb.append(len);
+                            }
+                            String result=sb.toString();
+                            Log.d("漫跑",result);
+                        } catch (Exception e) {
+                            Log.d("跑", "....");
+                            e.printStackTrace();
+
+                        }
+                    }
+                }.start();
+
                 tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();

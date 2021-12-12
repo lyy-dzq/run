@@ -31,6 +31,9 @@ public class enter_roam1Activity extends AppCompatActivity {
                 float data= (float) 0;
                 app.setJixu(data);
 
+//                app.setJixu(data);totalDistance=app.getJixu();
+
+
                 Intent intent = new Intent(enter_roam1Activity.this, xihuActivity.class);
                 startActivity(intent);
             }

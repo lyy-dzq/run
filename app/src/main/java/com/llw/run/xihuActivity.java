@@ -45,8 +45,12 @@ import com.amap.api.services.route.DistanceResult;
 import com.amap.api.services.route.DistanceSearch;
 import com.llw.run.ui.home.HomeFragment;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -89,6 +93,7 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,12 +101,8 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_xihu);
-     final Data app2 = (Data)getApplication();
-
-      totalDistance=app2.getJixu();
+//      totalDistance=app2.getJixu();
       Log.d("哇哈哈哈哈哈哈哈哈哈哈", totalDistance+"");
-
-
 
 //分享
        LinearLayout contentLayout=findViewById(R.id.tanchu);
@@ -111,7 +112,11 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
 
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
         mMapView.onCreate(savedInstanceState);
-        //不显示
+     final Data app2 = (Data)getApplication();
+     totalDistance=app2.getJixu();
+
+
+     //不显示
         initLocation();
         mLocationClient.startLocation();
 //跑步结束
@@ -125,7 +130,39 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
             @Override
             public void onClick(View v) {
                 timer.stop();
-                tanchu.setVisibility(View.VISIBLE);
+             //调用
+             new Thread(){
+              @Override
+              public void run() {
+               try {
+                String JSON_URL="http://10.21.234.20:8080/";
+                JSON_URL=JSON_URL+app2.getUid()+"/insertUserRomanticRun?"+"totalMile="+totalDistance/1000+"&runTime="+timer.getText();
+                Log.d("漫跑", JSON_URL);
+                URL url = new URL(JSON_URL);
+                HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+                urlConn.setRequestMethod("GET");
+                urlConn.setConnectTimeout(5000);
+                urlConn.setReadTimeout(5000);
+//                    int code = urlConn.getResponseCode();
+//                    if (code==200){
+                InputStream is=urlConn.getInputStream();
+                BufferedReader br=new BufferedReader(new InputStreamReader(is));
+                StringBuffer sb=new StringBuffer();
+                String len=null;
+                while((len=br.readLine())!=null){
+                 sb.append(len);
+                }
+                String result=sb.toString();
+                Log.d("漫跑",result);
+               } catch (Exception e) {
+                Log.d("跑", "....");
+                e.printStackTrace();
+
+               }
+              }
+             }.start();
+
+             tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss

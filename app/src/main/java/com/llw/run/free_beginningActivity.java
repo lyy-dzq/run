@@ -118,8 +118,8 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                     @Override
                     public void run() {
                         try {
-                            String JSON_URL="http://10.21.234.20:8080/{uid}/insertUserFreeRun?";
-                            JSON_URL=JSON_URL+"uid="+app.getUid()+"&totalMile="+totalDistance/1000+"&runTime="+timer.getText();
+                            String JSON_URL="http://10.21.234.20:8080/";
+                            JSON_URL=JSON_URL+app.getUid()+"/insertUserFreeRun?"+"totalMile="+totalDistance/1000+"&runTime="+timer.getText();
                             Log.d("跑步", JSON_URL);
                             URL url = new URL(JSON_URL);
                             HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
@@ -138,6 +138,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                             String result=sb.toString();
                             Log.d("自由跑",result);
                         } catch (Exception e) {
+                            Log.d("跑", "....");
                             e.printStackTrace();
 
                         }

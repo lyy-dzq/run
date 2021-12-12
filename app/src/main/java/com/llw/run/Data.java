@@ -52,6 +52,7 @@ public class Data extends Application {
     public void setB2(String s){ this.b2= s; }
     @Override
     public void onCreate(){
+        uid=null;
         jixu=0;
         a = "1:1";
         a2="关";
