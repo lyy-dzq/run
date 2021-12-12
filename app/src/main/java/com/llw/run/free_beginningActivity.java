@@ -1,7 +1,17 @@
  package com.llw.run;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +24,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +54,9 @@ import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -68,7 +82,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
     private LocationSource.OnLocationChangedListener mListener;
 
     private LatLng currentLatLng;
-    private long totalDistance=0;
+    private float totalDistance=0;
     private String sppeed;
     Chronometer timer;
     float movedDisdance;
@@ -81,6 +95,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_free_beginning);
+        final Data app = (Data)getApplication();
         timer=(Chronometer)findViewById(R.id.timer);
 //        mapView=findViewById(R.id.map_view);
 //        mapView.onCreate(savedInstanceState);
@@ -98,6 +113,37 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
             @Override
             public void onClick(View v) {
                 timer.stop();
+                //调用
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            String JSON_URL="http://10.21.234.20:8080/{uid}/insertUserFreeRun?";
+                            JSON_URL=JSON_URL+"uid="+app.getUid()+"&totalMile="+totalDistance/1000+"&runTime="+timer.getText();
+                            Log.d("跑步", JSON_URL);
+                            URL url = new URL(JSON_URL);
+                            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+                            urlConn.setRequestMethod("GET");
+                            urlConn.setConnectTimeout(5000);
+                            urlConn.setReadTimeout(5000);
+//                    int code = urlConn.getResponseCode();
+//                    if (code==200){
+                            InputStream is=urlConn.getInputStream();
+                            BufferedReader br=new BufferedReader(new InputStreamReader(is));
+                            StringBuffer sb=new StringBuffer();
+                            String len=null;
+                            while((len=br.readLine())!=null){
+                                sb.append(len);
+                            }
+                            String result=sb.toString();
+                            Log.d("自由跑",result);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }.start();
+
                 tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();
@@ -109,6 +155,49 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
                 distance2.setText(totalDistance/1000+"km");
                 speed2.setText(sppeed);
                 timer2.setText(timer.getText());
+
+            }
+        });
+        //调用后端
+
+
+
+
+
+
+        //退出、分享
+        //分享退出
+        LinearLayout contentLayout=findViewById(R.id.tanchu);
+        TextView tchu=findViewById(R.id.tchu);
+        tchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(free_beginningActivity.this, BottomNavigationActivity.class);
+                startActivity(intent);
+            }
+        });
+        TextView fxiang=findViewById(R.id.fxiang);
+        fxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contentLayout.setDrawingCacheEnabled(true);
+                contentLayout.buildDrawingCache();
+                Bitmap bitmap = Bitmap.createBitmap(contentLayout.getDrawingCache());
+                Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+
+                // 分享本地图片
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
+                intent.setType("image/*");
+                startActivity(Intent.createChooser(intent,"选择分享应用"));
+//                         intent.setType("image/*");
+//                         File file = new File(Environment.getExternalStorageDirectory()+"/imgCache/a0.jpg");
+//                         Uri uri = Uri.fromFile(file);
+//                         intent.putExtra(Intent.EXTRA_STREAM,uri);
+//
+//                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                         startActivity(Intent.createChooser(intent, "分享列表"));
             }
         });
     }
@@ -298,5 +387,7 @@ public class free_beginningActivity extends AppCompatActivity implements AMapLoc
         }
         mLocationClient = null;
     }
+
+
 
 }

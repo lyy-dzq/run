@@ -3,14 +3,24 @@ package com.llw.run;
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +43,12 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.route.DistanceResult;
 import com.amap.api.services.route.DistanceSearch;
+import com.llw.run.ui.home.HomeFragment;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,10 +64,13 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
 //跑步数据
-    //位置更改监听
+ //
+    final Data app = (Data)getApplication();
+
+ //位置更改监听
     private LocationSource.OnLocationChangedListener mListener;
     private LatLng currentLatLng;
-    private float totalDistance=0;
+    private float  totalDistance=0;
     private float movedDisdance;
     int i=0;
     float ss1,ss2,ss3,ss4,ss5,ss6,ss7,ss8,ss9;
@@ -68,7 +86,7 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
     private String sppeed;
     Chronometer timer;
     //
-    final Data app = (Data)getApplication();
+
 
 
     @Override
@@ -78,9 +96,15 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_xihu);
+     final Data app2 = (Data)getApplication();
+
+      totalDistance=app2.getJixu();
+      Log.d("哇哈哈哈哈哈哈哈哈哈哈", totalDistance+"");
 
 
 
+//分享
+       LinearLayout contentLayout=findViewById(R.id.tanchu);
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
         timer=(Chronometer)findViewById(R.id.timer);
@@ -113,7 +137,35 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
                 speed2.setText(sppeed);
                 timer2.setText(timer.getText());
                 stoprun.setVisibility(View.INVISIBLE);
+                //调用后端，保存数据
+
+            }
+        });
+        //分享退出
+        TextView tchu=findViewById(R.id.tchu);
+        tchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(xihuActivity.this, BottomNavigationActivity.class);
+                startActivity(intent);
+            }
+        });
+        TextView fxiang=findViewById(R.id.fxiang);
+        fxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contentLayout.setDrawingCacheEnabled(true);
+               contentLayout.buildDrawingCache();
+                Bitmap bitmap = Bitmap.createBitmap(contentLayout.getDrawingCache());
+                Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
                 
+                         // 分享本地图片
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
+                intent.setType("image/*");
+                startActivity(Intent.createChooser(intent,"选择分享应用"));
+
             }
         });
 
@@ -752,6 +804,8 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
     private void showMsg(String msg){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 

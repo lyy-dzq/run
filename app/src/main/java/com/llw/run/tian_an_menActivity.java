@@ -3,9 +3,13 @@ package com.llw.run;
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -78,7 +82,9 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_tian_an_men);
-
+        final Data app2 = (Data)getApplication();
+        totalDistance=app2.getJixu();
+        Log.d("哇哈哈哈哈哈哈哈哈哈哈", totalDistance+"");
 
 
         //获取地图控件引用
@@ -113,6 +119,39 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
                 speed2.setText(sppeed);
                 timer2.setText(timer.getText());
                 stoprun.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        //退出、分享
+        LinearLayout contentLayout=findViewById(R.id.tanchu);
+        //分享退出
+        TextView tchu=findViewById(R.id.tchu);
+        tchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(tian_an_menActivity.this, BottomNavigationActivity.class);
+                startActivity(intent);
+            }
+        });
+        TextView fxiang=findViewById(R.id.fxiang);
+        fxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                contentLayout.setDrawingCacheEnabled(true);
+                contentLayout.buildDrawingCache();
+                Bitmap bitmap = Bitmap.createBitmap(contentLayout.getDrawingCache());
+                Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+
+                // 分享本地图片
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
+                intent.setType("image/*");
+                startActivity(Intent.createChooser(intent,"选择分享应用"));
+
             }
         });
 

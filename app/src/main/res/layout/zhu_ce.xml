@@ -22,14 +22,35 @@
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:ems="10"
-        android:hint="请输入账号" />
+        android:hint="请输入邮箱号" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:id="@+id/yanzma"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="70dp"
+            android:hint="请输入验证码"
+            />
+        <Button
+            android:id="@+id/yanzma2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:text="发送验证码"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="请输入密码"
         android:inputType="textPassword"/>

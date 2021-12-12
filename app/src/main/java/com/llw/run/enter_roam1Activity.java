@@ -27,6 +27,24 @@ public class enter_roam1Activity extends AppCompatActivity {
         enterroam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                float data= (float) 0;
+                app.setJixu(data);
+
+                Intent intent = new Intent(enter_roam1Activity.this, xihuActivity.class);
+                startActivity(intent);
+            }
+        });
+        //继续漫跑
+        Button enterroam2=findViewById(R.id.enterroam2);
+        enterroam2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //传递数据
+                float data= (float) 34.5;
+                app.setJixu(data);
+
+                //跳转
                 Intent intent = new Intent(enter_roam1Activity.this, xihuActivity.class);
                 startActivity(intent);
             }

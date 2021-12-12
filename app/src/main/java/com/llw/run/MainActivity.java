@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Button bt1 = findViewById(R.id.denglu);
         Button bt2 = findViewById(R.id.zhuce);
         TextView bt3=findViewById(R.id.forgetmima);
+
+        //
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                             conn.setConnectTimeout(5000);              //设置连接超时时间5秒
                             conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
                             //将数据进行编码,然后会自动的将该数据放到post中传到后台
-                            String data="username="+ URLEncoder.encode(mQq2,"utf-8")+"&password="+ URLEncoder.encode(mPwd2,"utf-8");
+                            String data="email="+ URLEncoder.encode(mQq2,"utf-8")+"&password="+ URLEncoder.encode(mPwd2,"utf-8");
 //                            String data="userID="+ URLEncoder.encode("123456","utf-8")+"&userPwd="+URLEncoder.encode("123456","utf-8")+"&userName="+URLEncoder.encode("123456","utf-8")+"&phoneNumber="+URLEncoder.encode("123456","utf-8");
                             //指定长度
                             conn.setRequestProperty("Content-length",String.valueOf(data.length()));
@@ -90,9 +92,14 @@ public class MainActivity extends AppCompatActivity {
                                 String result=sb.toString();
 
 //                                showMsg(result);
-                                Log.d("ZhuCeActivity", result);
+                                Log.d("登陆", result);
                                 app.setinto(mQq2);
-                                app.setUid(result);
+
+                                if(!result.equals("邮箱不存在")&&!result.equals("密码错误")){
+                                    app.setUid(result);
+                                    Intent intent = new Intent(MainActivity.this, BottomNavigationActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

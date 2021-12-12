@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="run" />
+    <version value="8" />
+
+    <list>
+        <mapping class="com.llw.run.entity.FriendMoment" />
+        <mapping class="com.llw.run.entity.Replay" />
+    </list>
+
+</litepal>

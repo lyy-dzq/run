@@ -1,6 +1,7 @@
 package com.llw.run;
 
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 public class Order {
     private String username;

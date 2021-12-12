@@ -19,23 +19,30 @@
             android:text="广场"
             android:textColor="@color/zhuce_bj"
             android:textSize="28dp" />
+
         <Button
             android:id="@+id/tent"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:gravity="center"
             android:layout_gravity="center_vertical|right"
             android:layout_marginRight="15dp"
             android:background="@drawable/home_button2"
+            android:gravity="center"
             android:text="+"
-            android:textSize="20sp"
             android:textColor="@color/white"
-            />
+            android:textSize="20sp" />
     </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_run"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 </LinearLayout>

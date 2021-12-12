@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/buju"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -108,14 +110,42 @@
             android:layout_marginTop="350dp"
             android:visibility="invisible"
             android:layout_gravity="center_horizontal">
-            <TextView
-                android:id="@+id/jieshu"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:text="跑步结束"
-                android:textSize="40sp"
-                android:gravity="center"
-                android:background="@drawable/run_info"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/run_info"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tchu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:text="退出"/>
+                <TextView
+                    android:id="@+id/jieshu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:text="跑步结束"
+                    android:textSize="40sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/fxiang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"
+                    android:text="分享"/>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/xxi"
                 android:layout_width="300dp"
@@ -139,6 +169,7 @@
                 android:background="@drawable/run_info2"
                 android:orientation="vertical">
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 

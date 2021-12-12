@@ -2,13 +2,20 @@ package com.llw.run;
 
 import android.app.Application;
 
+import org.litepal.LitePal;
+
 public class Data extends Application {
-    private String suer_into;
+    private String suer_into;//用户名
     private String a;  //西湖
     private String a2;
     private String b;  //天安门
     private String b2;
-    private String uid;
+    private String uid;//用户uid
+    private float jixu; //是否继续漫跑标志
+
+    //继续漫跑
+    public float getJixu(){return this.jixu;}
+    public void setJixu(float s){ this.jixu=s;}
     //uid
     public String getUid(){
         return this.uid;
@@ -45,11 +52,13 @@ public class Data extends Application {
     public void setB2(String s){ this.b2= s; }
     @Override
     public void onCreate(){
+        jixu=0;
         a = "1:1";
         a2="关";
         b = "1:1";
         b2="关";
         super.onCreate();
+        LitePal.initialize(this);
     }
 
 }

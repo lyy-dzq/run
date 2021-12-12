@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/order_image"
-        android:layout_width="wrap_content"
+        android:layout_width="65dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"/>
+        android:layout_height="65dp"/>
     <TextView
         android:id="@+id/order_name"
+        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"/>
     <TextView
         android:id="@+id/order_mile"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
