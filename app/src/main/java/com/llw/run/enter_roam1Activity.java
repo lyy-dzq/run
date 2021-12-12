@@ -44,7 +44,7 @@ public class enter_roam1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //传递数据
-                float data= (float) 34.5;
+                float data= (float) app.getJixulishu();
                 app.setJixu(data);
 
                 //跳转

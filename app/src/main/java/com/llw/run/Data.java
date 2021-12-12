@@ -12,10 +12,19 @@ public class Data extends Application {
     private String b2;
     private String uid;//用户uid
     private float jixu; //是否继续漫跑标志
+    private float jixulishu;//用户继续跑的上一次公里数
+    private float jixulishu2;//用户继续跑的上一次公里数
 
     //继续漫跑
     public float getJixu(){return this.jixu;}
     public void setJixu(float s){ this.jixu=s;}
+
+    //继续漫跑
+    public float getJixulishu(){return this.jixulishu;}
+    public void setJixulishu(float s){ this.jixulishu=s;}
+    //继续漫跑
+    public float getJixulishu2(){return this.jixulishu2;}
+    public void setJixulishu2(float s){ this.jixulishu2=s;}
     //uid
     public String getUid(){
         return this.uid;
@@ -52,6 +61,7 @@ public class Data extends Application {
     public void setB2(String s){ this.b2= s; }
     @Override
     public void onCreate(){
+        jixulishu=0;
         uid=null;
         jixu=0;
         a = "1:1";

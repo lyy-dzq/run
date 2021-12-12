@@ -161,7 +161,7 @@ public class xihuActivity extends AppCompatActivity implements AMapLocationListe
                }
               }
              }.start();
-
+             app2.setJixulishu(totalDistance);
              tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();

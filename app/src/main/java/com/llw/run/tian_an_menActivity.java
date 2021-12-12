@@ -146,7 +146,7 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
                         }
                     }
                 }.start();
-
+                app3.setJixulishu2(totalDistance);
                 tanchu.setVisibility(View.VISIBLE);
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();
