@@ -58,7 +58,7 @@ public class pai_hangActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String JSON_URL="http://10.21.234.20:8080/queryFreeRunRank?flag=week";
+                    String JSON_URL="http://10.21.234.20:8080/queryFreeRunRank?flag=month";
                     URL url = new URL(JSON_URL);
                     HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                     urlConn.setRequestMethod("GET");
@@ -95,6 +95,7 @@ public class pai_hangActivity extends AppCompatActivity {
                             }
                             Order a=new Order(object.getString("username"),bitmap,"公里数: "+object.getString("totalMile"));
                             orderList.add(a);
+
 //                            Resources res = pai_hangActivity.this.getResources();
 //                            Bitmap bmp2= BitmapFactory.decodeResource(res, R.drawable.icon_home);
 //                            Order b=new Order("你是谁啊",bmp2,"23");

@@ -55,6 +55,7 @@
                 android:gravity="center"
                 android:text="累积公里"/>
             <TextView
+                android:id="@+id/lanse"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -76,6 +77,7 @@
                 android:gravity="center"
                 android:text="勋章数量"/>
             <TextView
+                android:id="@+id/hongse"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

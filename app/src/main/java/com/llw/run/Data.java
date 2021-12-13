@@ -1,6 +1,7 @@
 package com.llw.run;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 
 import org.litepal.LitePal;
 
@@ -14,6 +15,49 @@ public class Data extends Application {
     private float jixu; //是否继续漫跑标志
     private float jixulishu;//用户继续跑的上一次公里数
     private float jixulishu2;//用户继续跑的上一次公里数
+    private String medials;
+    private Bitmap toux;
+    private String nic2;
+    private String sex2;
+    private String birth2;
+    private String qian_m2;
+    private float c;
+    public float getC(){return this.c;}
+    public void setC(float s){ this.c=s;}
+    public String getMedials(){
+        return this.medials;
+    }
+    public void setMedials(String s){
+        this.medials= s;
+    }
+    public Bitmap getToux(){return this.toux;}
+    public void  setToux(Bitmap s){this.toux=s;}
+    public String getNic2(){
+        return this.nic2;
+    }
+    public void setNic2(String s){
+        this.nic2= s;
+    }
+    public String getSex2(){
+        return this.sex2;
+    }
+    public void setSex2(String s){
+        this.sex2= s;
+    }
+    public String getBirth2(){
+        return this.birth2;
+    }
+    public void setBirth2(String s){
+        this.birth2= s;
+    }
+    public String getQian_m2(){
+        return this.qian_m2;
+    }
+    public void setQian_m2(String s){
+        this.qian_m2= s;
+    }
+
+
 
     //继续漫跑
     public float getJixu(){return this.jixu;}
