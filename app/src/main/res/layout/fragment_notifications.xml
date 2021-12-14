@@ -111,7 +111,7 @@
                 android:src="@drawable/icon_xxi" />
             <TextView
                 android:text="个人信息"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textColor="#000000"
                 android:layout_weight="1"
                 android:layout_marginLeft="12dp"
@@ -147,7 +147,7 @@
                 android:gravity="center_vertical"
                 android:text="跑步记录"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <ImageView
                 android:layout_gravity="center_vertical"
@@ -174,7 +174,7 @@
             <TextView
                 android:text="设置"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="12dp"
                 android:gravity="center_vertical"

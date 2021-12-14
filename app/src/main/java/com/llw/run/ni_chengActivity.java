@@ -2,6 +2,7 @@ package com.llw.run;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,10 @@ public class ni_chengActivity extends AppCompatActivity {
                             }
                             String result=sb.toString();
                             Log.d("",result);
+                            if(result.equals("更新成功")){
+                                Intent intent = new Intent(ni_chengActivity.this, ge_renActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (Exception e) {
                             Log.d("跑", "....");
                             e.printStackTrace();

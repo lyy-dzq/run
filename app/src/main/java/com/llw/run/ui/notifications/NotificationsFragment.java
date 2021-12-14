@@ -137,10 +137,13 @@ public class NotificationsFragment extends Fragment {
         Glide.with(getActivity()).load(R.id.toux)
                 .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))
                 .into(hBack);
-        //设置圆形图像
-        Glide.with(getActivity()).load(R.id.toux)
-                .bitmapTransform(new CropCircleTransformation(getActivity()))
-                .into(hHead);
+//        //设置圆形图像
+//        Glide.with(getActivity()).load(R.id.toux)
+//                .bitmapTransform(new CropCircleTransformation(getActivity()))
+//                .into(hHead);
+        hHead.setImageBitmap(app.getToux());
+
+
         //显示用户名
         TextView mz=root.findViewById(R.id.mz);
         mz.setText(app.getNic2());

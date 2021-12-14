@@ -37,11 +37,11 @@ public class qian_mActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             String JSON_URL="http://10.21.234.20:8080/";
-                            JSON_URL=JSON_URL+app.getUid()+"/insertSigNatureByUid?"+"sigNature="+qm.getText().toString().trim();
+                            JSON_URL=JSON_URL+app.getUid()+"/insertSigNatureByUid?"+"sigNature="+qm.getText().toString();
                             Log.d("签名", JSON_URL);
                             URL url = new URL(JSON_URL);
                             HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-                            urlConn.setRequestMethod("POST");
+                            urlConn.setRequestMethod("GET");
                             urlConn.setConnectTimeout(80000);
                             urlConn.setReadTimeout(80000);
 //                    int code = urlConn.getResponseCode();
@@ -52,7 +52,6 @@ public class qian_mActivity extends AppCompatActivity {
                             String len=null;
                             while((len=br.readLine())!=null){
                                 sb.append(len);
-
                             }
                             String result=sb.toString();
                             Log.d("签名",result);
