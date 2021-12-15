@@ -1,6 +1,7 @@
 package com.llw.run;
 
 import android.Manifest;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,29 +12,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoActivity;
 import com.jph.takephoto.model.TImage;
 import com.jph.takephoto.model.TResult;
-import com.llw.run.entity.FriendMoment;
-import com.llw.run.entity.Replay;
+import com.llw.run.presenter.FabuPresenter;
+import com.llw.run.presenter.impl.FabuPresenterImp;
 import com.llw.run.ui.adapter.SelectImageAdapter;
-
-import org.litepal.LitePal;
+import com.llw.run.utils.Base64Utils;
+import com.llw.run.view.FabuView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class fa_buActivity extends TakePhotoActivity {
+public class fa_buActivity extends TakePhotoActivity implements FabuView {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -46,10 +47,12 @@ public class fa_buActivity extends TakePhotoActivity {
     @BindView(R.id.rv_images)
     RecyclerView rvImages;
 
+    private FabuPresenter fabuPresenter;
+
     private List<String> paths = new ArrayList<>();
     private SelectImageAdapter selectImageAdapter;
-    private int MaxText=150;
-    private int ReText=MaxText;
+    private int MaxLenth=150;
+    private int ReLenth=MaxLenth;
 
     private TakePhoto takePhoto;
 
@@ -59,6 +62,8 @@ public class fa_buActivity extends TakePhotoActivity {
 
         setContentView(R.layout.activity_fa_bu);
         ButterKnife.bind(this);
+
+        fabuPresenter = new FabuPresenterImp(this);
 
         takePhoto = getTakePhoto();
 
@@ -87,20 +92,18 @@ public class fa_buActivity extends TakePhotoActivity {
         tvTotal.setText("150");
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                tvTotal.setText(""+ReText);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tvTotal.setText(""+ReLenth);
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ReText=(MaxText-etContent.length());
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ReLenth=MaxLenth-etContent.length();
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                tvTotal.setText(""+ReText);
-
+            public void afterTextChanged(Editable editable) {
+                tvTotal.setText(""+ReLenth);
             }
         });
 
@@ -116,6 +119,14 @@ public class fa_buActivity extends TakePhotoActivity {
                 break;
             case R.id.text_publish:
 
+                List<String> images = new ArrayList<>();
+
+                for (String pathStr : paths) {
+
+                    images.add(Base64Utils.bitmapToBase64(BitmapFactory.decodeFile(pathStr)));
+
+                }
+
                 String content = etContent.getText().toString();
 
                 if (TextUtils.isEmpty(content) && paths.size() == 0) {
@@ -123,22 +134,25 @@ public class fa_buActivity extends TakePhotoActivity {
                     return;
                 }
 
-                List<Replay> replays = new ArrayList<>();
-
-                FriendMoment friendMoment = new FriendMoment();
-                friendMoment.setContent(content);
-                friendMoment.setImagePath(paths);
-                friendMoment.setTime(new Date().getTime());
-                friendMoment.setReplays(replays);
-
-                LitePal.saveAll(replays);
-
-                if (friendMoment.save()) {
-                    Toast.makeText(this, "发布成功", Toast.LENGTH_LONG).show();
-                    finish();
-                } else {
-                    Toast.makeText(this, "发布失败", Toast.LENGTH_LONG).show();
-                }
+                fabuPresenter.fabu("4eb396dd-c6a3-45c3-a7d0-d96f3399fc78", images, content);
+//
+//
+//                List<Replay> replays = new ArrayList<>();
+//
+//                FriendMoment friendMoment = new FriendMoment();
+//                friendMoment.setContent(content);
+//                friendMoment.setImagePath(paths);
+//                friendMoment.setTime(new Date().getTime());
+//                friendMoment.setReplays(replays);
+//
+//                LitePal.saveAll(replays);
+//
+//                if (friendMoment.save()) {
+//                    Toast.makeText(this, "发布成功", Toast.LENGTH_LONG).show();
+//                    finish();
+//                } else {
+//                    Toast.makeText(this, "发布失败", Toast.LENGTH_LONG).show();
+//                }
 
 
                 break;
@@ -159,6 +173,17 @@ public class fa_buActivity extends TakePhotoActivity {
         }
 
         selectImageAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onFabuResponse(boolean success) {
+
+        if (success) {
+            Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+            finish();
+        } else
+            Toast.makeText(this, "发布失败", Toast.LENGTH_SHORT).show();
 
     }
 }

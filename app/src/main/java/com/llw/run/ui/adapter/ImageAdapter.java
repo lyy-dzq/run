@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.llw.run.R;
+import com.llw.run.utils.Base64Utils;
 
 import java.util.List;
 
@@ -36,7 +36,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        Glide.with(context).load(paths.get(position)).into(holder.ivImage);
+//        Glide.with(context).load(paths.get(position)).into(holder.ivImage);
+
+        holder.ivImage.setImageBitmap(Base64Utils.base64ToBitmap(paths.get(position)));
 
         holder.ivImage.setOnClickListener(new View.OnClickListener() {
             @Override

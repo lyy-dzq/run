@@ -36,7 +36,7 @@ public class qian_mActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            String JSON_URL="http://10.21.234.20:8080/";
+                            String JSON_URL="http://101.35.202.198:8080/";
                             JSON_URL=JSON_URL+app.getUid()+"/insertSigNatureByUid?"+"sigNature="+qm.getText().toString();
                             Log.d("签名", JSON_URL);
                             URL url = new URL(JSON_URL);

@@ -120,7 +120,7 @@ public class tian_an_menActivity extends AppCompatActivity implements AMapLocati
                     @Override
                     public void run() {
                         try {
-                            String JSON_URL="http://10.21.234.20:8080/";
+                            String JSON_URL="http://101.35.202.198:8080/";
                             JSON_URL=JSON_URL+app3.getUid()+"/insertUserRomanticRun?"+"totalMile="+totalDistance/1000+"&runTime="+timer.getText();
                             Log.d("漫跑", JSON_URL);
                             URL url = new URL(JSON_URL);

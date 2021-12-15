@@ -75,7 +75,7 @@ public class ZhuCeActivity extends AppCompatActivity   {
                         try {
 //                    Thread.sleep(5000);
 //                            String path="http://47.113.226.119:8080/register";
-                            String path="http://10.21.234.20:8080/sendEmail";
+                            String path="http://101.35.202.198:8080/sendEmail";
                             URL url = new URL(path);
                             //打开httpurlconnection
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -134,7 +134,7 @@ public class ZhuCeActivity extends AppCompatActivity   {
                         try {
 //                    Thread.sleep(5000);
 //                            String path="http://47.113.226.119:8080/register";
-                            String path="http://10.21.234.20:8080/register";
+                            String path="http://101.35.202.198:8080/register";
                             URL url = new URL(path);
                             //打开httpurlconnection
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

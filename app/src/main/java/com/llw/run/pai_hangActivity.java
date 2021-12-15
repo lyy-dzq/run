@@ -58,7 +58,7 @@ public class pai_hangActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String JSON_URL="http://10.21.234.20:8080/queryFreeRunRank?flag=week";
+                    String JSON_URL="http://101.35.202.198:8080/queryFreeRunRank?flag=week";
                     URL url = new URL(JSON_URL);
                     HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                     urlConn.setRequestMethod("GET");

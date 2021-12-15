@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.llw.run.R;
-import com.llw.run.entity.Replay;
+import com.llw.run.http.res.FriendRes;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
 public class ReplayAdapter extends RecyclerView.Adapter<ReplayAdapter.ViewHolder> {
 
     private Context context;
-    private List<Replay> replays;
+    private List<FriendRes.CommentWithDynamicsEntity> replays;
 
-    public ReplayAdapter(Context context, List<Replay> replays) {
+    public ReplayAdapter(Context context, List<FriendRes.CommentWithDynamicsEntity> replays) {
         this.context = context;
         this.replays = replays;
     }
@@ -39,7 +39,8 @@ public class ReplayAdapter extends RecyclerView.Adapter<ReplayAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         holder.tvContent.setText(replays.get(position).getContent());
-        holder.tvName.setText(replays.get(position).getName());
+        holder.tvName.setText(replays.get(position).getUsername());
+        holder.tv_time.setText(replays.get(position).getCommentTime());
 
         Glide.with(context).load("https://img1.baidu.com/it/u=3303981320,1355171730&fm=26&fmt=auto").into(holder.ivImage);
 
@@ -58,6 +59,8 @@ public class ReplayAdapter extends RecyclerView.Adapter<ReplayAdapter.ViewHolder
         TextView tvName;
         @BindView(R.id.tv_content)
         TextView tvContent;
+        @BindView(R.id.tv_time)
+        TextView tv_time;
 
         ViewHolder(View view) {
             super(view);

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <LinearLayout
@@ -93,19 +94,30 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:id="@+id/ll_zan_bt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="1dp"
                     android:background="@mipmap/zan" />
 
-
-
+                <TextView
+                    android:id="@+id/tv_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/smssdk_gray"
+                    android:textSize="12dp" />
 
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#66000000"
+        android:layout_marginTop="10dp"
+        android:layout_height="0.2dp"/>
 
 
 </LinearLayout>

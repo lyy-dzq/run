@@ -244,7 +244,7 @@ public class ge_renActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        String JSON_URL="http://10.21.234.20:8080/";
+                        String JSON_URL="http://101.35.202.198:8080/";
                         JSON_URL=JSON_URL+app2.getUid()+"/insertAvatorByUid?"+"avator="+base64;
                         Log.d("头像", JSON_URL);
                         URL url = new URL(JSON_URL);
@@ -333,7 +333,7 @@ public class ge_renActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            String JSON_URL="http://10.21.234.20:8080/";
+                            String JSON_URL="http://101.35.202.198:8080/";
                             JSON_URL=JSON_URL+app3.getUid()+"/insertBirthByUid?"+"birth="+getTime(date);
                             Log.d("生日", JSON_URL);
                             URL url = new URL(JSON_URL);
@@ -409,7 +409,7 @@ public class ge_renActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            String JSON_URL="http://10.21.234.20:8080/";
+                            String JSON_URL="http://101.35.202.198:8080/";
                             JSON_URL=JSON_URL+app4.getUid()+"/insertSexByUid?"+"sex="+sexArry[which];
                             Log.d("性别", JSON_URL);
                             URL url = new URL(JSON_URL);
@@ -484,7 +484,7 @@ public class ge_renActivity extends AppCompatActivity {
              try {
 //                    Thread.sleep(5000);
 //                            String path="http://47.113.226.119:8080/register";
-                 String path="http://10.21.234.20:8080/"+appo.getUid()+"/queryTotalUserMsgByUid";
+                 String path="http://101.35.202.198:8080/"+appo.getUid()+"/queryTotalUserMsgByUid";
                  URL url = new URL(path);
                  //打开httpurlconnection
                  HttpURLConnection conn = (HttpURLConnection) url.openConnection();

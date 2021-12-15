@@ -62,5 +62,4 @@ public class FriendMoment extends LitePalSupport implements Serializable {
     public void setImages(List<Integer> images) {
         this.images = images;
     }
-
 }

@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#22000000"
     android:orientation="vertical"
     tools:context=".fa_buActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -26,7 +28,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:text="发布"
-            android:textColor="@color/zhuce_bj" />
+            android:textColor="@color/colorAccent" />
 
 
     </RelativeLayout>
@@ -49,8 +51,7 @@
             android:maxLength="150"
             android:maxLines="10"
             android:padding="15dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
 
         <LinearLayout
@@ -61,14 +62,11 @@
 
             <TextView
                 android:id="@+id/tv_total"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="right"
-                android:rotationX="0"
-                android:text="150"
-                android:textColor="@color/bg_gray"
-                android:textSize="20sp" />
+                android:text="150" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_images"
